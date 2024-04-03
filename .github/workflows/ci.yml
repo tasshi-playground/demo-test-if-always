@@ -16,6 +16,8 @@ jobs:
       - name: Extract platform
         if: always()
         run: echo "platform=$(echo ${{ matrix.os }} | cut -d '-' -f 1)" >> $GITHUB_ENV
+      - name: Failure
+        run: exit -1
       - name: Echo platform
-        if: ${{ env.platform == 'ubuntu' && always() }}
+        if: ${{ env.platform == 'ubuntu' }}
         run: echo "${{ env.platform }}"
