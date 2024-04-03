@@ -19,5 +19,5 @@ jobs:
       - name: Failure
         run: exit -1
       - name: Echo platform
-        if: ${{ env.platform == 'ubuntu' && always() }}
+        if: ${{ env.platform == 'ubuntu' && cancelled() }}
         run: echo "${{ env.platform }}"
