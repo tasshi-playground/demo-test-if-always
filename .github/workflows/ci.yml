@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  test:
+    name: CI on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Extract platform
+        if: always()
+        run: echo "platform=$(echo ${{ matrix.os }} | cut -d '-' -f 1)" >> $GITHUB_ENV
+      - name: Echo platform
+        if: ${{ env.platform == 'ubuntu' && always() }}
+        run: echo "${{ env.platform }}"
